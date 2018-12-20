@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{96AEF3FC-C287-4DBE-8225-BFD1DC7B0B4E}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WiserControl</RootNamespace>
+    <AssemblyName>WiserControl</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>heating.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\Referenced Assemblies\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ToggleSwitch">
+      <HintPath>..\Wiser\ToggleSwitch.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RoomHistoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RoomHistoryForm.Designer.cs">
+      <DependentUpon>RoomHistoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="WiserRoomControl2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WiserRoomControl2.designer.cs">
+      <DependentUpon>WiserRoomControl2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WiserSystemControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WiserSystemControl.designer.cs">
+      <DependentUpon>WiserSystemControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WiserWaterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WiserWaterControl.designer.cs">
+      <DependentUpon>WiserWaterControl.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RoomHistoryForm.resx">
+      <DependentUpon>RoomHistoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WiserRoomControl2.resx">
+      <DependentUpon>WiserRoomControl2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WiserSystemControl.resx">
+      <DependentUpon>WiserSystemControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WiserWaterControl.resx">
+      <DependentUpon>WiserWaterControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Log4Net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WiserMonitor\WiserMonitor.csproj">
+      <Project>{63ad4a0b-5f62-4353-aff7-d5eabf1d03a5}</Project>
+      <Name>WiserMonitor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Wiser\Wiser.csproj">
+      <Project>{9bc12151-e1bb-4dfa-8912-dd7852223da8}</Project>
+      <Name>Wiser</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="heating.ico" />
+    <None Include="Images\HeatDemand.png" />
+    <None Include="Images\Manual.png" />
+    <None Include="Images\HotWaterOff.png" />
+    <None Include="Images\HotWater.png" />
+    <None Include="Images\HeatingOn.png" />
+    <None Include="Images\HeatingOff.png" />
+    <None Include="Images\HotRadiator2.png" />
+    <None Include="Images\BatteryTwoThirds.png" />
+    <None Include="Images\BatteryOneThird.png" />
+    <None Include="Images\BatteryNormal.png" />
+    <None Include="Images\BatteryCritical.png" />
+    <None Include="Images\ComfortDisabled.png" />
+    <None Include="Images\EcoDisabled.png" />
+    <None Include="Images\AwayDisabled.png" />
+    <None Include="Images\away.png" />
+    <None Include="Images\boost.png" />
+    <None Include="Images\Comfort.png" />
+    <None Include="Images\Eco.png" />
+    <None Include="Images\ease-hand-419x500.png" />
+    <None Include="Images\Schedule.png" />
+    <None Include="Resources\ScheduleImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
