@@ -50,7 +50,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="ToggleSwitch">
-      <HintPath>..\Wiser\ToggleSwitch.dll</HintPath>
+      <HintPath>..\Referenced Assemblies\ToggleSwitch.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
