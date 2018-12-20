@@ -1,15 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wiser", "Wiser\Wiser.csproj", "{9BC12151-E1BB-4DFA-8912-DD7852223DA8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiserControl", "WiserControl\WiserControl.csproj", "{96AEF3FC-C287-4DBE-8225-BFD1DC7B0B4E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TempRecorder", "TempRecorder\TempRecorder.csproj", "{F4E67453-6DF2-4363-8889-81CCD5A82C16}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiserPlug", "WiserPlug\WiserPlug.csproj", "{356A9C92-DD3E-4632-9CD2-2ED9A1009C9A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiserMonitor", "WiserMonitor\WiserMonitor.csproj", "{63AD4A0B-5F62-4353-AFF7-D5EABF1D03A5}"
 EndProject
@@ -29,14 +25,6 @@ Global
 		{96AEF3FC-C287-4DBE-8225-BFD1DC7B0B4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96AEF3FC-C287-4DBE-8225-BFD1DC7B0B4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96AEF3FC-C287-4DBE-8225-BFD1DC7B0B4E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F4E67453-6DF2-4363-8889-81CCD5A82C16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F4E67453-6DF2-4363-8889-81CCD5A82C16}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F4E67453-6DF2-4363-8889-81CCD5A82C16}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F4E67453-6DF2-4363-8889-81CCD5A82C16}.Release|Any CPU.Build.0 = Release|Any CPU
-		{356A9C92-DD3E-4632-9CD2-2ED9A1009C9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{356A9C92-DD3E-4632-9CD2-2ED9A1009C9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{356A9C92-DD3E-4632-9CD2-2ED9A1009C9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{356A9C92-DD3E-4632-9CD2-2ED9A1009C9A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{63AD4A0B-5F62-4353-AFF7-D5EABF1D03A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{63AD4A0B-5F62-4353-AFF7-D5EABF1D03A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63AD4A0B-5F62-4353-AFF7-D5EABF1D03A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -48,5 +36,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {651C5A16-8097-4DCF-A893-1103F37BA6B1}
 	EndGlobalSection
 EndGlobal
