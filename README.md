@@ -2,11 +2,11 @@
 ## Control interface for Drayton Wiser 
 
 Designed to create a standalone control interface for Drayton Wiser Heating control, running on a windows tablet, but obviously will run on a PC as well.
-(Written in c#, targeting .Net v4.0)
+(Written in C#, targeting .Net v4.0)
 
 Not intended to replace the official app, and as such doesn't currently provide all the functionality (e.g. scheduling).
 
-Does including a monitoring component and tracks temperature and battery data to a LiteDB database.  Also added a system tray app for quick access to room temps and boost.
+Includes a monitoring component and tracks temperature and battery data to a LiteDB database.  Also added a system tray app for quick access to room temps and boost.
 
 There are several components:
 
@@ -15,12 +15,12 @@ There are several components:
 - WiserMonitor - Provides interfaces to log to a LiteDB database & export CSV data
 - SystemTrayApp - Windows app which appears as a system tray icon only - right click to see room temps and apply boosts
 
-Based on a lot of work done by Chris Evans and Rob Pope  
+Based on a lot of work done by Chris Evans and Rob Pope (including the config help below)
 https://github.com/chrisduffer/drayton-wiser  
 https://github.com/RobPope/DraytonWiser  
 
 ## Configuration
-Wiser.dll.config needs to be configured with the Heat Hub's "secret" key and IP address 
+Wiser.dll.config needs to be configured with your Heat Hub's "secret" key and IP address 
 
 ### Find your secret
 
