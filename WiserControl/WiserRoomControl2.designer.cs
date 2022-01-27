@@ -50,6 +50,7 @@
             this.boostLabel0 = new System.Windows.Forms.Label();
             this.noOverridePictureBox = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.plugPictureBox = new System.Windows.Forms.PictureBox();
             this.bottomPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.heatDemandPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoManualPictureBox)).BeginInit();
@@ -61,6 +62,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.downPictureBox)).BeginInit();
             this.boostPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.noOverridePictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.plugPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // currrentTempLabel
@@ -114,6 +116,7 @@
             // 
             // bottomPanel
             // 
+            this.bottomPanel.Controls.Add(this.plugPictureBox);
             this.bottomPanel.Controls.Add(this.setPointLabel);
             this.bottomPanel.Controls.Add(this.heatDemandPictureBox);
             this.bottomPanel.Controls.Add(this.autoManualPictureBox);
@@ -298,6 +301,15 @@
             this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // plugPictureBox
+            // 
+            this.plugPictureBox.Location = new System.Drawing.Point(119, 8);
+            this.plugPictureBox.Name = "plugPictureBox";
+            this.plugPictureBox.Size = new System.Drawing.Size(30, 30);
+            this.plugPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.plugPictureBox.TabIndex = 13;
+            this.plugPictureBox.TabStop = false;
+            // 
             // WiserRoomControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -323,6 +335,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.downPictureBox)).EndInit();
             this.boostPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.noOverridePictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.plugPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -350,5 +363,6 @@
         private System.Windows.Forms.Label boostLabel1;
         private System.Windows.Forms.PictureBox batteryPictureBox;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.PictureBox plugPictureBox;
     }
 }

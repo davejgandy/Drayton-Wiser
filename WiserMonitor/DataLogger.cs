@@ -21,10 +21,11 @@ namespace WiserMonitor
                 using (var logDB = new LiteDatabase(GetDBPath()))
                 {
                     var valveData = logDB.GetCollection<SmartValveData>();
+                    var plugData = logDB.GetCollection<SmartplugData>();
 
                     foreach (var device in hub.Device)
                     {
-                        if (device.ProductIdentifier == "iTRV")
+                        if (device.ProductType == "iTRV")
                         {
                             var newData = new SmartValveData
                             {
@@ -38,6 +39,21 @@ namespace WiserMonitor
                             };
                             valveData.Insert(newData);
                         }
+                        else if (device.ProductType == "SmartPlug")
+                        {
+                            var newData = new SmartplugData
+                            {
+                                DeviceID = device.id,
+                                DataDate = DateTime.Now,
+                                ManufacturerName = device.ProductIdentifier,
+                                ModelName = device.ModelIdentifier,
+                                //OutputState = device.OutputState,
+                                DisplayedSignalStrength = device.DisplayedSignalStrength,
+                                DeviceLQI = device.ReceptionOfDevice.Lqi,
+                                DeviceRSSI = device.ReceptionOfDevice.Rssi
+                            };
+                            plugData.Insert(newData);
+                        }
                     }
                 }
             }
@@ -45,6 +61,7 @@ namespace WiserMonitor
             {
             }
         }
+
 
         public void WriteRoomData(HeatHub hub)
         {

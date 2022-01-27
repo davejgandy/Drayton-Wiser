@@ -74,13 +74,16 @@ namespace Wiser
                     }
                     catch (Exception ex)
                     {
+                        // TODO: Don't block the UI
                         Thread.Sleep(1000);
+                        
                     }
                 }
             }
             return null;
         }
 
+        
         private string SendRequestToHub(string urlSuffix, string method, string requestData)
         {
             try

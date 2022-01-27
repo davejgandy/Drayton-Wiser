@@ -127,6 +127,9 @@
   <data name="BatteryCriticalImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\BatteryCritical.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BatteryLowImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\BatteryLow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="BatteryNormalImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\BatteryNormal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -171,5 +174,11 @@
   </data>
   <data name="ScheduleImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\Schedule.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SocketOffImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\SocketOff.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SocketOnImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\SocketOn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

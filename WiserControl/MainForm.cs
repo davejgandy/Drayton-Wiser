@@ -72,13 +72,13 @@ namespace WiserControl
                 if (control == null)
                 {
                     log.DebugFormat("Adding Room Control for {0}", room.Name);
-                    var newControl = new WiserRoomControl(room);
+                    var newControl = new WiserRoomControl(room, _hub.SmartPlug);
                     newControl.ChangeRequested += NewControl_ChangeRequested;
                     controlPanel.Controls.Add(newControl);
                 }
                 else
                 {
-                    control.Refresh(room);
+                    control.Refresh(room, _hub.SmartPlug);
                 }
             }
 

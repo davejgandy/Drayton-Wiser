@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -84,7 +85,7 @@ namespace WiserControl
             _room.Name = roomName;
         }
 
-        public WiserRoomControl(Room room)
+        public WiserRoomControl(Room room, List<SmartPlug> AssociatedPlugs)
         {
             InitializeComponent();
             //rounded corners!
@@ -105,7 +106,7 @@ namespace WiserControl
             //path.AddEllipse(boundsRect);
             //this.setPointLabel.Region = new Region(path);
 
-            Refresh(room);
+            Refresh(room, AssociatedPlugs);
         }
 
         public override string ToString()
@@ -125,7 +126,7 @@ namespace WiserControl
             SetColour(bottomPanel, _room.DisplayedSetPoint);
         }
 
-        public void Refresh(Room room)
+        public void Refresh(Room room, List<SmartPlug> Plugs)
         {
             _room = room;
             roomLabel.Text = _room.Name;
@@ -135,6 +136,7 @@ namespace WiserControl
             autoManualPictureBox.Tag = _room.SetPointOrigin; // == "FromSchedule" ? "auto": "manual" ;   //FromManualOverride
             ShowAutoManualImage();
             ShowBatteryStatus();
+            ShowPlugStatus(_room.id, Plugs);
 
             if (room.PercentageDemand > 0)
             {
@@ -144,6 +146,7 @@ namespace WiserControl
             else
                 heatDemandPictureBox.Visible = false;
 
+      //      if(room.)
         }
 
         private enum BatteryStatus
@@ -151,6 +154,7 @@ namespace WiserControl
             Critical,
             Low,
             OneThird,
+            TwoThirds,
             Normal
         }
 
@@ -158,15 +162,21 @@ namespace WiserControl
         {
             var worstStatus = BatteryStatus.Normal;
 
-            foreach (int id in _room.SmartValveIds)
-            {
-                var device = Program.MainForm.GetDeviceById(id);
-                if (device != null)
+            // Some rooms may not have valves, but maybe just plugs or range extenders,
+            // so check for empty list of valves.
+            if (_room.SmartValveIds != null)
+            { 
+                foreach (int id in _room.SmartValveIds)
                 {
-                    BatteryStatus status;
-                    if (Enum.TryParse(device.BatteryLevel, out status))
-                        if (status < worstStatus)
-                            worstStatus = status;
+                    Debug.WriteLine("ID: {0}", id);
+                    var device = Program.MainForm.GetDeviceById(id);
+                    if (device != null)
+                    {
+                        BatteryStatus status;
+                        if (Enum.TryParse(device.BatteryLevel, out status))
+                            if (status < worstStatus)
+                                worstStatus = status;
+                    }
                 }
             }
 
@@ -189,10 +199,14 @@ namespace WiserControl
                     FlashBatteryIcon(true);
                     break;
                 case BatteryStatus.Low:
-                    batteryPictureBox.Image = Resources.BatteryOneThirdImage;
+                    batteryPictureBox.Image = Resources.BatteryLowImage;
                     FlashBatteryIcon(false);
                     break;
                 case BatteryStatus.OneThird:
+                    batteryPictureBox.Image = Resources.BatteryOneThirdImage;
+                    FlashBatteryIcon(false);
+                    break;
+                case BatteryStatus.TwoThirds:
                     batteryPictureBox.Image = Resources.BatteryTwoThirdsImage;
                     FlashBatteryIcon(false);
                     break;
@@ -201,6 +215,36 @@ namespace WiserControl
                     FlashBatteryIcon(false);
                     break;
             }
+        }
+
+        private void ShowPlugStatus(int RoomId, List<SmartPlug> Plugs)
+        {
+            if (Plugs != null)
+            {
+                foreach (SmartPlug P in  Plugs)
+                {
+                    Debug.WriteLine("Plug RoomID: {0}, Room: {1}", P.RoomId, RoomId);
+                    if (P.RoomId == RoomId)
+                    { 
+                        if (P.OutputState == "On")
+                            plugPictureBox.Image = Resources.SocketOnImage;
+                        else
+                            plugPictureBox.Image = Resources.SocketOffImage;
+                        plugPictureBox.Visible = true;
+                    }
+                    /*
+                     * var device = Program.MainForm.GetDeviceById(id);
+                     if (device != null)
+                     {
+                         BatteryStatus status;
+                         if (Enum.TryParse(device.BatteryLevel, out status))
+                             if (status < worstStatus)
+                                 worstStatus = status;
+                     }
+                    */
+                }
+            }
+
         }
 
         private void FlashBatteryIcon(bool flash)
