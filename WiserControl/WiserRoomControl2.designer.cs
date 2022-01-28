@@ -35,6 +35,8 @@
             this.setPointLabel = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.bottomPanel = new System.Windows.Forms.Panel();
+            this.labelPlugPower = new System.Windows.Forms.Label();
+            this.plugPictureBox = new System.Windows.Forms.PictureBox();
             this.heatDemandPictureBox = new System.Windows.Forms.PictureBox();
             this.autoManualPictureBox = new System.Windows.Forms.PictureBox();
             this.batteryPictureBox = new System.Windows.Forms.PictureBox();
@@ -51,6 +53,7 @@
             this.noOverridePictureBox = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.bottomPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.plugPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.heatDemandPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoManualPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.batteryPictureBox)).BeginInit();
@@ -114,6 +117,8 @@
             // 
             // bottomPanel
             // 
+            this.bottomPanel.Controls.Add(this.labelPlugPower);
+            this.bottomPanel.Controls.Add(this.plugPictureBox);
             this.bottomPanel.Controls.Add(this.setPointLabel);
             this.bottomPanel.Controls.Add(this.heatDemandPictureBox);
             this.bottomPanel.Controls.Add(this.autoManualPictureBox);
@@ -123,6 +128,29 @@
             this.bottomPanel.Name = "bottomPanel";
             this.bottomPanel.Size = new System.Drawing.Size(250, 50);
             this.bottomPanel.TabIndex = 12;
+            // 
+            // labelPlugPower
+            // 
+            this.labelPlugPower.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelPlugPower.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPlugPower.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.labelPlugPower.Location = new System.Drawing.Point(105, 35);
+            this.labelPlugPower.Name = "labelPlugPower";
+            this.labelPlugPower.Size = new System.Drawing.Size(44, 11);
+            this.labelPlugPower.TabIndex = 14;
+            this.labelPlugPower.Text = "000W";
+            this.labelPlugPower.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.labelPlugPower.Click += new System.EventHandler(this.labelPlugPower_Click);
+            // 
+            // plugPictureBox
+            // 
+            this.plugPictureBox.Location = new System.Drawing.Point(119, 3);
+            this.plugPictureBox.Name = "plugPictureBox";
+            this.plugPictureBox.Size = new System.Drawing.Size(30, 30);
+            this.plugPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.plugPictureBox.TabIndex = 13;
+            this.plugPictureBox.TabStop = false;
+            this.plugPictureBox.Click += new System.EventHandler(this.plugPictureBox_Click);
             // 
             // heatDemandPictureBox
             // 
@@ -313,6 +341,7 @@
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.WiserRoomControl_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.WiserRoomControl_MouseDown);
             this.bottomPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.plugPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.heatDemandPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoManualPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.batteryPictureBox)).EndInit();
@@ -350,5 +379,7 @@
         private System.Windows.Forms.Label boostLabel1;
         private System.Windows.Forms.PictureBox batteryPictureBox;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.PictureBox plugPictureBox;
+        private System.Windows.Forms.Label labelPlugPower;
     }
 }

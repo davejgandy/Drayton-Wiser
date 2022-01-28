@@ -19,7 +19,7 @@ namespace WiserControl {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -86,6 +86,16 @@ namespace WiserControl {
         internal static System.Drawing.Bitmap BatteryCriticalImage {
             get {
                 object obj = ResourceManager.GetObject("BatteryCriticalImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BatteryLowImage {
+            get {
+                object obj = ResourceManager.GetObject("BatteryLowImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -236,6 +246,30 @@ namespace WiserControl {
         internal static System.Drawing.Bitmap ScheduleImage {
             get {
                 object obj = ResourceManager.GetObject("ScheduleImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SocketOnImage
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("SocketOnImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SocketOffImage
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("SocketOffImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

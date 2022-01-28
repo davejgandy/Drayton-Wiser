@@ -17,6 +17,19 @@ namespace WiserMonitor
         public int DeviceRSSI { get; set; }
     }
 
+    public class SmartplugData
+    {
+        public Guid Id { get; set; }
+        public int DeviceID { get; set; }
+        public DateTime DataDate { get; set; }
+        public string ManufacturerName { get; set; }    // So far have come across 'OwonSmartplug' and 'HeimanSmartplug' .... they look physically different too.
+        public string ModelName { get; set; }           // So far have come across 'WSP402' (Owon) and 'SmartPlug' (Heiman)
+        public string OutputState { get; set; }           
+        public string DisplayedSignalStrength { get; set; }
+        public int DeviceLQI { get; set; }
+        public int DeviceRSSI { get; set; }
+    }
+
     public class RoomData
     {
         public Guid Id { get; set; }

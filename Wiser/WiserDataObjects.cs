@@ -192,9 +192,11 @@ namespace Wiser.DataObjects
         public string Name { get; set; }
         public string Mode { get; set; }
         public string AwayAction { get; set; }
+        public int RoomId { get; set; }
         public string OutputState { get; set; }
         public string ControlSource { get; set; }
         public string ScheduledState { get; set; }
+        public int InstantaneousDemand { get; set;  }
     }
 
     public class DeviceCapabilityMatrix
