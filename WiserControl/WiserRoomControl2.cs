@@ -96,7 +96,15 @@ namespace WiserControl
                 RoundControl(label);
 
             foreach (Control c in bottomPanel.Controls)
-                c.Top = bottomPanel.Height / 2 - c.Height / 2;
+                if ((c.Name == "plugPictureBox") || ( c.Name == "labelPlugPower"))
+                {
+                    if (c.Name == "plugPictureBox")
+                        c.Top = bottomPanel.Height / 2 - (plugPictureBox.Height + labelPlugPower.Height) / 2;
+                    else
+                        c.Top = bottomPanel.Height / 2 - (plugPictureBox.Height + labelPlugPower.Height) / 2 + plugPictureBox.Height;
+                }
+                else
+                    c.Top = bottomPanel.Height / 2 - c.Height / 2;
             foreach (Control c in buttonPanel.Controls)
                 c.Top = buttonPanel.Height / 2 - c.Height / 2;
 
@@ -130,12 +138,37 @@ namespace WiserControl
         {
             _room = room;
             roomLabel.Text = _room.Name;
-            currrentTempLabel.Text = string.Format("{0:0.0}°C", (double)room.RoundedAlexaTemperature / 10);
+
+            if (_room.CalculatedTemperature == -32768)
+            {
+                // Room values unknown...are iTRV's offline, or are none configured?
+                if (_room.SmartValveIds == null)
+                {
+                    // A room containing no TRV's, but there might be plugs or thermostats.
+                    // Hide temperature controls.
+                    currrentTempLabel.Visible = false;
+                    buttonPanel.Visible = false;
+                    batteryPictureBox.Visible = false;
+                    setPointLabel.Visible = false;
+                    ShowPlugStatus(_room.id, Plugs);
+                    return;
+                }
+                else
+                {
+                    currrentTempLabel.Text = "offline";
+                    batteryPictureBox.Visible = false;
+                }
+            }
+            else
+            {
+                currrentTempLabel.Text = string.Format("{0:0.0}°C", (double)room.RoundedAlexaTemperature / 10);
+                ShowBatteryStatus();
+            }
+
             DisplaySetPoint(room.DisplayedSetPoint);
 
             autoManualPictureBox.Tag = _room.SetPointOrigin; // == "FromSchedule" ? "auto": "manual" ;   //FromManualOverride
             ShowAutoManualImage();
-            ShowBatteryStatus();
             ShowPlugStatus(_room.id, Plugs);
 
             if (room.PercentageDemand > 0)
@@ -145,8 +178,6 @@ namespace WiserControl
             }
             else
                 heatDemandPictureBox.Visible = false;
-
-      //      if(room.)
         }
 
         private enum BatteryStatus
@@ -165,7 +196,7 @@ namespace WiserControl
             // Some rooms may not have valves, but maybe just plugs or range extenders,
             // so check for empty list of valves.
             if (_room.SmartValveIds != null)
-            { 
+            {
                 foreach (int id in _room.SmartValveIds)
                 {
                     Debug.WriteLine("ID: {0}", id);
@@ -181,7 +212,7 @@ namespace WiserControl
             }
 
             if (_room.RoomStatId > 0)
-            { 
+            {
                 var device = Program.MainForm.GetDeviceById(_room.RoomStatId);
                 if (device != null)
                 {
@@ -219,18 +250,24 @@ namespace WiserControl
 
         private void ShowPlugStatus(int RoomId, List<SmartPlug> Plugs)
         {
+            Boolean bRoomHasPlug = false;
+
             if (Plugs != null)
             {
-                foreach (SmartPlug P in  Plugs)
+                foreach (SmartPlug P in Plugs)
                 {
                     Debug.WriteLine("Plug RoomID: {0}, Room: {1}", P.RoomId, RoomId);
                     if (P.RoomId == RoomId)
-                    { 
+                    {
                         if (P.OutputState == "On")
                             plugPictureBox.Image = Resources.SocketOnImage;
                         else
                             plugPictureBox.Image = Resources.SocketOffImage;
-                        plugPictureBox.Visible = true;
+
+                        labelPlugPower.Text = string.Format("{0}W", P.InstantaneousDemand);
+                        labelPlugPower.Tag = P.Name;
+                        plugPictureBox.Tag = P.Name;
+                        bRoomHasPlug = true;
                     }
                     /*
                      * var device = Program.MainForm.GetDeviceById(id);
@@ -245,8 +282,10 @@ namespace WiserControl
                 }
             }
 
+            labelPlugPower.Visible = bRoomHasPlug;
+            plugPictureBox.Visible = bRoomHasPlug;
         }
-
+    
         private void FlashBatteryIcon(bool flash)
         {
             if (flash)
@@ -407,6 +446,23 @@ namespace WiserControl
             var graphForm = new RoomHistoryForm(_room.Name);
             graphForm.ShowDialog();
 
+        }
+
+        static Boolean b = false;
+
+        private void plugPictureBox_Click(object sender, EventArgs e)
+        {
+            bool? NewState;
+            
+            NewState = Program.wiserConnection.GetSmartPlugRelayState(plugPictureBox.Tag.ToString());
+
+            if (NewState.HasValue) 
+                Program.wiserConnection.SetSmartPlugRelayState(plugPictureBox.Tag.ToString(), !NewState.Value);
+        }
+
+        private void labelPlugPower_Click(object sender, EventArgs e)
+        {
+            plugPictureBox_Click(sender, e);
         }
     }
 }

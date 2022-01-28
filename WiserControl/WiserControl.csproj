@@ -159,7 +159,6 @@
     <Content Include="heating.ico" />
     <Content Include="Images\Socket Off.png" />
     <Content Include="Images\Socket On.png" />
-    <None Include="Resources\SocketOffImage.bmp" />
     <None Include="Images\BatteryLowImage.png" />
     <None Include="Images\HeatDemand.png" />
     <None Include="Images\Manual.png" />

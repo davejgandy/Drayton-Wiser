@@ -196,6 +196,7 @@ namespace Wiser.DataObjects
         public string OutputState { get; set; }
         public string ControlSource { get; set; }
         public string ScheduledState { get; set; }
+        public int InstantaneousDemand { get; set;  }
     }
 
     public class DeviceCapabilityMatrix

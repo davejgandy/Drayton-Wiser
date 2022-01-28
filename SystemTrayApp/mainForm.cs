@@ -41,13 +41,30 @@ namespace WiserSystemTrayApp
             foreach (var r in _hub.Room.OrderBy(r => r.Name))
             {
                 var newMenu = mainContextMenuStrip.Items.Add(r.Name) as ToolStripMenuItem;
-                newMenu.Image = GetTempImage((double)r.RoundedAlexaTemperature);
+                if (r.SmartValveIds != null)
+                    if (r.CalculatedTemperature == -32768)
+                        newMenu.Image = GetMenuImage(Color.Yellow, "--");
+                    else
+                        newMenu.Image = GetTempImage((double)r.RoundedAlexaTemperature);
                 //newMenu.ForeColor = GetInterpolatedColor(Color.DarkBlue, Color.Red, r.PercentageDemand / 100);
                 newMenu.ForeColor = GetColorForHeatDemand(r.PercentageDemand);
 
                 ToolStripLabel dropDownLabel = new ToolStripLabel("(Set by " + r.SetPointOrigin.Substring(4) + ")");
                 dropDownLabel.Image = GetTempImage((double)r.DisplayedSetPoint);
                 int i = newMenu.DropDownItems.Add(dropDownLabel);
+
+                // If there are plugs in this room, show their status too.
+                if (_hub.SmartPlug != null)
+                {
+                    foreach (var plug in _hub.SmartPlug)
+                    {
+                        if (plug.RoomId == r.id)
+                        {
+                            var newPlugItem = newMenu.DropDownItems.Add("Plug '" + plug.Name + "'", GetPlugStatusImage(plug.OutputState), PlugToggle_Click) as ToolStripMenuItem;
+                            newPlugItem.Tag = plug;
+                        }
+                    }
+                }
                 newMenu.DropDownItems.Add("-");
 
                 //find boost end datetime
@@ -67,10 +84,10 @@ namespace WiserSystemTrayApp
                 newDropDownItem = newMenu.DropDownItems.Add("1 hour", null, Boost1_Click) as ToolStripMenuItem;
                 newDropDownItem.Tag = r;
                 newDropDownItem.Checked = (boostMinutes > 30 && boostMinutes <= 60);
-                newDropDownItem = newMenu.DropDownItems.Add("2 hours", null, Boost1_Click) as ToolStripMenuItem;
+                newDropDownItem = newMenu.DropDownItems.Add("2 hours", null, Boost2_Click) as ToolStripMenuItem;
                 newDropDownItem.Tag = r;
                 newDropDownItem.Checked = (boostMinutes > 60 && boostMinutes <= 120);
-                newDropDownItem = newMenu.DropDownItems.Add("3 hours", null, Boost1_Click) as ToolStripMenuItem;
+                newDropDownItem = newMenu.DropDownItems.Add("3 hours", null, Boost3_Click) as ToolStripMenuItem;
                 newDropDownItem.Tag = r;
                 newDropDownItem.Checked = (boostMinutes > 120);
             }
@@ -142,6 +159,18 @@ namespace WiserSystemTrayApp
         private bool IsHotWaterOn()
         {
             return _hub.HotWater[0].WaterHeatingState == "On";
+        }
+
+        private Bitmap GetPlugStatusImage(String State)
+        {
+            Bitmap bmp;
+
+            if (State == "On")
+                bmp = GetMenuImage(Color.LightCoral, "On", 21);
+            else
+                bmp = GetMenuImage(Color.LightBlue, "Off", 21);
+
+            return bmp;
         }
 
         private Bitmap GetWaterStatusImage()
@@ -228,6 +257,18 @@ namespace WiserSystemTrayApp
             var room = ((ToolStripMenuItem)sender).Tag as Room;
             _connection.SetRoomOverride(room.id, room.RoundedAlexaTemperature + 20, 180);
         }
+        private void PlugToggle_Click(object sender, EventArgs e)
+        {
+            var plug = ((ToolStripMenuItem)sender).Tag as SmartPlug;
+            bool NewState;
+
+            if (plug.OutputState == "On")
+                NewState = false;
+            else
+                NewState = true;
+            _connection.SetSmartPlugRelayState(plug.Name, NewState);
+        }
+
 
 
     }
